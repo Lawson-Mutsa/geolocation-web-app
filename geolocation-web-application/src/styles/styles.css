@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #F4F1DE;
+    overflow: hidden;
+}
+header {
+    height: 12vh;
+    background-color: #264653; 
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 12vh;
+}
+.header-content img {
+    margin-left: 15px;
+}
+.header-content a {
+    color: #264653;
+    text-decoration: none;
+    margin-right: 18px;
+    background-color: #F4F1DE;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+.header-content a:hover {
+    cursor: pointer;
+}
+main {
+    height: 88vh;
+    color: #264653;
+}
+.home-information-form h1 {
+    font-size: 24px;
+}
+.home-information-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7vh;    
+}
+.home-information{
+    margin-top: 2vh;
+}
+.home-information input {
+    margin-top: 1vh;
+    padding: 1.5vh;
+}
+.home-information input::placeholder {
+    font-size: 13px;
+    font-family: "Montserrat", sans-serif;
+}
+.home-information input:focus {
+    font-size: 13px;
+}
+.home-information label {
+    margin-top: 2vh;
+    font-size: 15px;
+}
+.home-information input,.home-information label {
+    display: block;
+    width: 50vw;
+}
+.home-information input[type='button'] {
+    background-color:#264653;  
+    color: #F4F1DE;
+    margin-top: 2vh;
+    text-align: center;
+    padding: 1vh;
+    font-size: 15px;
+     font-family: "Montserrat", sans-serif;
+}
+.home-information input[type='button']:hover {
+    color:#264653;  
+    background-color: #F4F1DE;
+    margin-top: 2vh;
+    text-align: center;
+    padding: 1vh;
+    font-size: 15px;
+     font-family: "Montserrat", sans-serif;
+}
+.home-information-additional-links a {
+    text-decoration: none;
+    color: blue;
+}
+.home-information-additional-links a:hover {
+    text-decoration: underline;
+}
+
+/* Location Information Page */
+h1 {
+    margin-top: 7vh;
+    font-size: 24px;
+    text-align: center;
+}
+.location-info-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vh;
+}
+.location-info-ipaddress {
+    height: 20vh;
+    background-color: #264653;
+    color: #F4F1DE;
+    padding: 2vh;
+    border-radius: 10px;
+    position: relative;
+    z-index: 25;
+}
+.location-info-ipaddress h2 {
+    font-size: 17px;
+}
+.location-info-moreinfo {
+    height: 30vh;   
+    background-color: #264653;
+    color: #F4F1DE;
+    padding: 2vh;
+    border-radius: 10px;
+}
+.location-info-moreinfo h2 {
+    font-size: 17px;
+}
+.location-info-map {
+    height: 38vh;
+
+}

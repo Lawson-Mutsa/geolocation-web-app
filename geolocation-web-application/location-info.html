@@ -1,38 +1,46 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Geolocation Web Application | Home</title>
+    <title>Location Details</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./public/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./src/styles/styles.css">
       
+      
   </head>
   <body>
     <header>
       <div class="header-content">
         <img src="./public/images/logo.png" alt="IP Address Image Representation" width="40" height="40">
-       <!-- <a href="" target="_blank" rel="noopener noreferrer">Get Location Info</a> -->
       </div>
     </header>
-
     <main>
-      
-        <div class="home-information-form">
-            <h1>Get Your Location Info</h1>
-            <form action="" method="" class="home-information">
-                <label>IP Address
-                    <input type="text" placeholder="Enter ip address" required>
-                </label>
-                <input type="button" value="Get info">
-            </form>
-        </div>
- 
-    </main>
 
-  
+        <h1>Your Location Info</h1>
+
+        <div class="location-info-page">
+            
+            <div class="location-info-ipaddress">
+                <h2>IP Address: </h2>
+            </div>
+
+            <div class="location-info-moreinfo">
+                <h2>More Information</h2>
+                <br>
+                <p>Country: </p>
+                <p>City: </p>
+                <p>Location: </p>
+                <p>Internet Service Provider: </p>
+            </div>
+
+            <div class="location-info-map">
+
+            </div>
+        </div>
+    </main>  
   </body>
 </html>
