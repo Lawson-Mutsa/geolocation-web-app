@@ -7,31 +7,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./public/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./src/styles/styles.css">
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="./src/scripts/scripts.js" defer></script>
+      
   </head>
   <body>
     <header>
       <div class="header-content">
-        <img src="/images/logo.png" alt="IP Address Image Representation" width="40" height="40">
+        <img src="./public/images/logo.png" alt="IP Address Image Representation" width="40" height="40">
+       <!-- <a href="" target="_blank" rel="noopener noreferrer">Get Location Info</a> -->
       </div>
     </header>
 
     <main>
+      
         <div class="home-information-form">
             <h1>Get Your Location Info</h1>
-            <form class="home-information" action="location-info.html">
+            <form action="" method="" class="home-information">
                 <label>IP Address
-                    <input type="text" id="ipInput" placeholder="Enter ip address" required> <!-- Added id="ipInput" -->
+                    <input type="text" placeholder="Enter ip address" required>
                 </label>
-                <input type="button" id="getInfoBtn" value="Get info"> <!-- Added id="getInfoBtn" -->
+                <input type="button" value="Get info">
             </form>
-            <p style="margin-top: 1vh;">
-              <a href="#" id="detectPublicIP">I don't know my public IP — detect it for me</a>
-            </p>
         </div>
+ 
     </main>
+
+  
   </body>
 </html>

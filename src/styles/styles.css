@@ -1,26 +1,32 @@
+/* ================= General Styles ================= */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: "Montserrat", sans-serif;
     background-color: #F4F1DE;
-    overflow: hidden;
+    overflow-x: hidden;
 }
+
 header {
     height: 12vh;
     background-color: #264653; 
 }
+
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 12vh;
 }
+
 .header-content img {
     margin-left: 15px;
 }
+
 .header-content a {
     color: #264653;
     text-decoration: none;
@@ -30,44 +36,59 @@ header {
     font-size: 18px;
     border-radius: 10px;
 }
+
 .header-content a:hover {
     cursor: pointer;
 }
+
 main {
-    height: 88vh;
+    min-height: 88vh;
     color: #264653;
+    padding-bottom: 2vh;
 }
+
+/* ================= Home Information Form ================= */
 .home-information-form h1 {
     font-size: 24px;
+    text-align: center;
+    margin-top: 7vh;
 }
+
 .home-information-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 7vh;    
+    align-items: center;  
 }
+
 .home-information{
     margin-top: 2vh;
 }
+
 .home-information input {
     margin-top: 1vh;
     padding: 1.5vh;
-}
-.home-information input::placeholder {
-    font-size: 13px;
     font-family: "Montserrat", sans-serif;
 }
+
+.home-information input::placeholder {
+    font-size: 13px;
+}
+
 .home-information input:focus {
     font-size: 13px;
 }
+
 .home-information label {
     margin-top: 2vh;
     font-size: 15px;
 }
-.home-information input,.home-information label {
+
+.home-information input,
+.home-information label {
     display: block;
     width: 50vw;
 }
+
 .home-information input[type='button'] {
     background-color:#264653;  
     color: #F4F1DE;
@@ -75,61 +96,133 @@ main {
     text-align: center;
     padding: 1vh;
     font-size: 15px;
-     font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
 .home-information input[type='button']:hover {
     color:#264653;  
     background-color: #F4F1DE;
-    margin-top: 2vh;
-    text-align: center;
-    padding: 1vh;
-    font-size: 15px;
-     font-family: "Montserrat", sans-serif;
 }
+
 .home-information-additional-links a {
     text-decoration: none;
     color: blue;
 }
+
 .home-information-additional-links a:hover {
     text-decoration: underline;
 }
 
-/* Location Information Page */
+/* ================= Location Information Page ================= */
 h1 {
     margin-top: 7vh;
     font-size: 24px;
     text-align: center;
 }
-.location-info-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 4vh;
-}
-.location-info-ipaddress {
-    height: 20vh;
-    background-color: #264653;
-    color: #F4F1DE;
-    padding: 2vh;
-    border-radius: 10px;
-    position: relative;
-    z-index: 25;
-}
-.location-info-ipaddress h2 {
-    font-size: 17px;
-}
-.location-info-moreinfo {
-    height: 30vh;   
-    background-color: #264653;
-    color: #F4F1DE;
-    padding: 2vh;
-    border-radius: 10px;
-}
-.location-info-moreinfo h2 {
-    font-size: 17px;
-}
-.location-info-map {
-    height: 38vh;
 
+.location-info-page {
+    display: grid;
+    grid-template-columns: 1fr; /* single column for small devices */
+    gap: 2vh; /* spacing between items */
+    justify-items: center;
+    margin: 4vh 2vw; /* horizontal margin for small devices */
+}
+
+/* Grid items (boxes) */
+.location-info-ipaddress,
+.location-info-moreinfo,
+.location-info-map {
+    width: 95%; /* almost full width */
+    max-width: 500px; /* limit width on larger screens */
+    border-radius: 10px;
+}
+
+/* IP Address Box */
+.location-info-ipaddress {
+    height: auto;
+    background-color: #264653;
+    color: #F4F1DE;
+    padding: 2vh;
+    line-height: 1.5;
+}
+
+.location-info-ipaddress h2 {
+    font-size: 16px;
+}
+
+/* More Info Box */
+.location-info-moreinfo {
+    height: auto;   
+    background-color: #264653;
+    color: #F4F1DE;
+    padding: 2vh;
+    line-height: 1.5;
+}
+
+.location-info-moreinfo h2 {
+    font-size: 16px;
+}
+
+/* Map Box */
+.location-info-map {
+    width: 95%;
+    max-width: 500px;
+    height: 40vh; /* small device default */
+    border-radius: 10px;
+    position: relative; /* contain map */
+    overflow: hidden; /* prevent overlapping */
+}
+
+/* Leaflet map container */
+.location-info-map .leaflet-container {
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: auto;
+}
+
+/* ================= Responsive Layout ================= */
+
+/* Tablets and larger (min-width: 768px) */
+@media screen and (min-width: 768px) {
+    .location-info-page {
+        grid-template-columns: 1fr 1fr; /* 2 columns */
+        gap: 2vh 2vw;
+        align-items: start;
+    }
+
+    /* Map spans full width below info boxes */
+    .location-info-map {
+        grid-column: 1 / -1; 
+        height: 50vh;
+    }
+
+    .location-info-ipaddress,
+    .location-info-moreinfo {
+        width: 100%;
+    }
+}
+
+/* Extra-large screens (min-width: 1200px) */
+@media screen and (min-width: 1200px) {
+    .location-info-page {
+        grid-template-columns: 1fr 1fr 1fr; /* optional 3 columns */
+        gap: 3vh 3vw;
+    }
+
+    .location-info-map {
+        grid-column: 1 / -1; /* full width */
+        height: 60vh;
+    }
+}
+
+/* ================= Leaflet Map Touch Fix ================= */
+
+/* Disable map dragging on small screens to prevent overlapping scroll */
+@media screen and (max-width: 767px) {
+    .location-info-map .leaflet-container {
+        touch-action: none; /* disable map drag interference */
+    }
 }
