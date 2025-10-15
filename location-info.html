@@ -1,50 +1,215 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Location Details</title>
+    <title>Location Details | IP Insight Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/styles/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="./src/scripts/scripts.js" defer></script>
-      
   </head>
   <body>
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Gathering location data...</p>
+      </div>
+    </div>
+
     <header>
       <div class="header-content">
-        <img src="/images/logo.png" alt="IP Address Image Representation" width="40" height="40">
+        <div class="logo-container">
+          <a href="index.html" class="logo-link">
+            <img src="/images/logo.png" alt="IP Insight Logo" width="40" height="40">
+            <span class="logo-text">IP Insight</span>
+          </a>
+        </div>
+        <nav>
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="recent-searches.html" class="nav-link">Recent</a>
+        </nav>
       </div>
     </header>
-    <main>
 
-        <h1>Your Location Info</h1>
-
-        <div class="location-info-page">
-            
-            <div class="location-info-ipaddress">
-                <h2>IP Address: </h2>
-            </div>
-
-            <div class="location-info-moreinfo">
-                <h2>More Information</h2>
-                <br>
-                <p>Country: </p>
-                <p>City: </p>
-                <p>Location: </p>
-                <p>ISP: </p>
-            </div>
-
-            <div class="location-info-map">
-
-            </div>
-
+    <main class="location-info-main">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="page-title">
+            <span class="title-icon">ℹ️</span>
+            Location Information
+          </h1>
+          <button class="back-btn" onclick="window.history.back()">
+            <span class="btn-icon">←</span>
+            Back to Search
+          </button>
         </div>
+
+        <div class="location-info-grid">
+          <!-- IP Address Card -->
+          <div class="info-card ip-card">
+            <div class="card-header">
+              <h2>
+                <span class="card-icon">💻</span>
+                IP Address
+              </h2>
+              <button class="copy-btn" id="copyIpBtn" title="Copy IP Address">
+                <span class="copy-icon">📋</span>
+              </button>
+            </div>
+            <div class="card-content">
+              <div class="ip-display" id="ipDisplay">
+                <span class="ip-value">Loading...</span>
+                <span class="ip-type" id="ipType"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location Details Card -->
+          <div class="info-card location-card">
+            <div class="card-header">
+              <h2>
+                <span class="card-icon">🗺️</span>
+                Location Details
+              </h2>
+              <button class="copy-btn" id="copyLocationBtn" title="Copy Location Info">
+                <span class="copy-icon">📋</span>
+              </button>
+            </div>
+            <div class="card-content">
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Country</span>
+                  <span class="info-value" id="countryValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">City</span>
+                  <span class="info-value" id="cityValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Region</span>
+                  <span class="info-value" id="regionValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Coordinates</span>
+                  <span class="info-value" id="coordinatesValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Address</span>
+                  <span class="info-value" id="addressValue">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Network Information Card -->
+          <div class="info-card network-card">
+            <div class="card-header">
+              <h2>
+                <span class="card-icon">🌐</span>
+                Network Information
+              </h2>
+              <button class="copy-btn" id="copyNetworkBtn" title="Copy Network Info">
+                <span class="copy-icon">📋</span>
+              </button>
+            </div>
+            <div class="card-content">
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">ISP</span>
+                  <span class="info-value" id="ispValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Organization</span>
+                  <span class="info-value" id="orgValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Hostname</span>
+                  <span class="info-value" id="hostnameValue">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Information Card -->
+          <div class="info-card time-card">
+            <div class="card-header">
+              <h2>
+                <span class="card-icon">⏰</span>
+                Time Information
+              </h2>
+              <button class="copy-btn" id="copyTimeBtn" title="Copy Time Info">
+                <span class="copy-icon">📋</span>
+              </button>
+            </div>
+            <div class="card-content">
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Timezone</span>
+                  <span class="info-value" id="timezoneValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Local Time</span>
+                  <span class="info-value" id="localTimeValue">—</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">UTC Offset</span>
+                  <span class="info-value" id="utcOffsetValue">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map Container -->
+          <div class="info-card map-card">
+            <div class="card-header">
+              <h2>
+                <span class="card-icon">🗺️</span>
+                Location Map
+              </h2>
+              <div class="map-actions">
+                <button class="map-btn" id="zoomInBtn" title="Zoom In">
+                  <span class="map-icon">+</span>
+                </button>
+                <button class="map-btn" id="zoomOutBtn" title="Zoom Out">
+                  <span class="map-icon">−</span>
+                </button>
+                <button class="map-btn" id="locateBtn" title="Recenter Map">
+                  <span class="map-icon">⌖</span>
+                </button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="map-container" id="mapContainer">
+                <div class="map-placeholder">
+                  <span class="map-placeholder-icon">🗺️</span>
+                  <p>Loading interactive map...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="action-btn primary" id="newSearchBtn">
+            <span class="btn-icon">🔍</span>
+            New Search
+          </button>
+          <button class="action-btn secondary" id="saveSearchBtn">
+            <span class="btn-icon">💾</span>
+            Save Search
+          </button>
+        </div>
+      </div>
     </main>
-   
-  
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
   </body>
 </html>

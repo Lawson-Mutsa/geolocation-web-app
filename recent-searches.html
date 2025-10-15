@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recent Searches | IP Insight Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/styles/styles.css">
+     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <script src="./src/scripts/recent-searches.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo-container">
+          <a href="index.html" class="logo-link">
+            <img src="/images/logo.png" alt="IP Insight Logo" width="40" height="40">
+            <span class="logo-text">IP Insight</span>
+          </a>
+        </div>
+        <nav>
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="recent-searches.html" class="nav-link active">Recent</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="recent-searches-main">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="page-title">
+            <span class="title-icon">📚</span>
+            Recent IP Searches
+          </h1>
+          <button class="back-btn" onclick="window.history.back()">
+            <span class="btn-icon">←</span>
+            Back
+          </button>
+        </div>
+
+        <div class="recent-content">
+          <div class="recent-stats">
+            <div class="stat-card">
+              <div class="stat-icon">🔍</div>
+              <div class="stat-info">
+                <span class="stat-number" id="totalSearches">0</span>
+                <span class="stat-label">Total Searches</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🌍</div>
+              <div class="stat-info">
+                <span class="stat-number" id="uniqueCountries">0</span>
+                <span class="stat-label">Countries</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⏰</div>
+              <div class="stat-info">
+                <span class="stat-number" id="lastSearch">—</span>
+                <span class="stat-label">Last Search</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="recent-list-container">
+            <div class="list-header">
+              <h2>Search History</h2>
+              <button class="clear-btn" id="clearHistoryBtn">
+                <span class="btn-icon">🗑️</span>
+                Clear All
+              </button>
+            </div>
+            
+            <div class="recent-list" id="recentList">
+              <div class="empty-state">
+                <span class="empty-icon">📭</span>
+                <h3>No Recent Searches</h3>
+                <p>Your IP search history will appear here.</p>
+                <a href="index.html" class="action-btn primary">
+                  <span class="btn-icon">🔍</span>
+                  Start Searching
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
