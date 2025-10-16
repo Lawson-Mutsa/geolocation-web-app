@@ -211,5 +211,107 @@
 
     <!-- Notification Toast -->
     <div class="toast" id="toast"></div>
+  <script>
+// Complete location-info.html functionality
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("Setting up location-info page functionality...");
+    
+    // ===== NEW SEARCH BUTTON =====
+    const newSearchBtn = document.getElementById('newSearchBtn');
+    console.log("New Search button found:", !!newSearchBtn);
+    
+    if (newSearchBtn) {
+        newSearchBtn.addEventListener('click', function() {
+            console.log("🔄 New Search button clicked - redirecting to index.html");
+            window.location.href = "index.html";
+        });
+    }
+    
+    // ===== SAVE SEARCH BUTTON =====
+    const saveBtn = document.getElementById('saveSearchBtn');
+    console.log("Save Search button found:", !!saveBtn);
+    
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function() {
+            console.log("🎯 SAVE SEARCH BUTTON CLICKED! 🎯");
+            
+            // Get all the current displayed data
+            const ip = document.querySelector("#ipDisplay .ip-value")?.textContent?.trim() || "";
+            const ipType = document.querySelector("#ipDisplay .ip-type")?.textContent?.trim() || "IPv4";
+            
+            console.log("IP to save:", ip);
+            
+            // Check if we have valid data
+            if (!ip || ip === "Loading..." || ip === "Unknown") {
+                alert("No valid IP data to save. Please wait for data to load.");
+                return;
+            }
+
+            // Get all the location and network data
+            const country = document.getElementById("countryValue")?.textContent?.trim() || "—";
+            const city = document.getElementById("cityValue")?.textContent?.trim() || "—";
+            const region = document.getElementById("regionValue")?.textContent?.trim() || "—";
+            const coordinates = document.getElementById("coordinatesValue")?.textContent?.trim() || "—";
+            const address = document.getElementById("addressValue")?.textContent?.trim() || "—";
+            const isp = document.getElementById("ispValue")?.textContent?.trim() || "—";
+            const org = document.getElementById("orgValue")?.textContent?.trim() || "—";
+            const hostname = document.getElementById("hostnameValue")?.textContent?.trim() || "—";
+            const timezone = document.getElementById("timezoneValue")?.textContent?.trim() || "—";
+
+            // Create search object
+            const search = {
+                id: Date.now(),
+                ip, 
+                ipType,
+                country, 
+                city, 
+                region, 
+                coordinates, 
+                address,
+                isp, 
+                org, 
+                hostname, 
+                timezone,
+                timestamp: new Date().toISOString(),
+                date: new Date().toLocaleString()
+            };
+
+            console.log("Search data to save:", search);
+
+            // Save to localStorage
+            let searches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
+            console.log("Existing searches before:", searches);
+            
+            // Remove duplicates (same IP)
+            searches = searches.filter(s => s.ip !== ip);
+            
+            // Add new search to beginning
+            searches.unshift(search);
+            
+            // Keep only last 20 searches
+            searches = searches.slice(0, 20);
+            
+            // Save back to localStorage
+            localStorage.setItem("recentSearches", JSON.stringify(searches));
+            
+            console.log("Search saved successfully! Total searches now:", searches.length);
+            alert(`Search saved for IP: ${ip}`);
+            
+            // Optional: Update the button text temporarily to show success
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<span class="btn-icon">✅</span> Saved!';
+            setTimeout(() => {
+                saveBtn.innerHTML = originalText;
+            }, 2000);
+        });
+        
+        console.log("Save search event listener added successfully!");
+    } else {
+        console.error("Save search button not found!");
+    }
+    
+    console.log("Location-info page setup complete!");
+});
+</script>
   </body>
 </html>

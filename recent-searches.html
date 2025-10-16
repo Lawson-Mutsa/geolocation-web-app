@@ -89,5 +89,105 @@
         </div>
       </div>
     </main>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
   </body>
+  <script>
+// Recent searches functionality
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("Loading recent searches...");
+    
+    const searches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
+    console.log("Found searches:", searches);
+    
+    const totalSearchesElem = document.getElementById("totalSearches");
+    const uniqueCountriesElem = document.getElementById("uniqueCountries");
+    const lastSearchElem = document.getElementById("lastSearch");
+    const recentListElem = document.getElementById("recentList");
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+
+    // Update statistics
+    if (totalSearchesElem) totalSearchesElem.textContent = searches.length;
+    if (uniqueCountriesElem) {
+        const uniqueCountries = [...new Set(searches.map(s => s.country).filter(c => c && c !== "—"))];
+        uniqueCountriesElem.textContent = uniqueCountries.length;
+    }
+    if (lastSearchElem) {
+        lastSearchElem.textContent = searches.length > 0 ? 
+            new Date(searches[0].timestamp).toLocaleDateString() : "—";
+    }
+
+    // Update the list
+    if (recentListElem) {
+        if (searches.length === 0) {
+            recentListElem.innerHTML = `
+                <div class="empty-state">
+                    <span class="empty-icon">📭</span>
+                    <h3>No Recent Searches</h3>
+                    <p>Your IP search history will appear here.</p>
+                    <a href="index.html" class="action-btn primary">
+                        <span class="btn-icon">🔍</span>
+                        Start Searching
+                    </a>
+                </div>`;
+        } else {
+            recentListElem.innerHTML = searches.map(search => `
+                <div class="recent-search-card">
+                    <div class="search-card-header">
+                        <div class="search-ip-info">
+                            <span class="ip-address">${search.ip}</span>
+                            <span class="ip-type-badge">${search.ipType}</span>
+                        </div>
+                        <span class="search-date">${new Date(search.timestamp).toLocaleDateString()}</span>
+                    </div>
+                    <div class="search-card-content">
+                        <div class="search-location">
+                            <span class="location-icon">📍</span>
+                            ${search.city !== "—" ? search.city + ", " : ""}${search.country !== "—" ? search.country : "Unknown location"}
+                        </div>
+                        <div class="search-isp">${search.isp !== "—" ? search.isp : "Unknown ISP"}</div>
+                    </div>
+                    <div class="search-card-actions">
+                        <button class="view-search-btn action-btn" onclick="sessionStorage.setItem('selectedIP', '${search.ip}'); window.location.href='location-info.html';">
+                            <span class="btn-icon">🔍</span>
+                            View Details
+                        </button>
+                        <button class="delete-search-btn action-btn secondary" onclick="deleteSearch(${search.id})">
+                            <span class="btn-icon">🗑️</span>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+        }
+    }
+
+    // Clear history button
+    if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener("click", function() {
+            if (searches.length === 0) {
+                alert("No searches to clear");
+                return;
+            }
+            
+            if (confirm("Are you sure you want to clear all recent searches?")) {
+                localStorage.removeItem("recentSearches");
+                alert("All searches cleared");
+                window.location.reload();
+            }
+        });
+    }
+});
+
+// Delete search function
+function deleteSearch(searchId) {
+    if (confirm("Are you sure you want to delete this search?")) {
+        let searches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
+        searches = searches.filter(search => search.id !== searchId);
+        localStorage.setItem("recentSearches", JSON.stringify(searches));
+        alert("Search deleted");
+        window.location.reload();
+    }
+}
+</script>
 </html>
