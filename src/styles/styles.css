@@ -886,3 +886,109 @@ main {
 .leaflet-control-zoom a:hover {
   background: #1e3a47;
 }
+/* =========================================
+   ADDITIONAL RESPONSIVE REFINEMENTS
+   ========================================= */
+
+/* For medium screens (tablets and small laptops) */
+@media (max-width: 1024px) {
+  .hero-content {
+    max-width: 90%;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+/* For smaller tablets and large phones */
+@media (max-width: 768px) {
+  header {
+    height: auto;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-content {
+    padding: var(--space-md);
+  }
+
+  .search-card {
+    width: 100%;
+    margin: 0 auto var(--space-xl);
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .quick-actions {
+    flex-direction: column;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    margin-top: var(--space-xl);
+  }
+}
+
+/* For very small mobile screens */
+@media (max-width: 480px) {
+  .logo-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .hero-section {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .search-card {
+    padding: var(--space-md);
+  }
+
+  .quick-btn {
+    font-size: 0.9rem;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .feature-card {
+    padding: var(--space-md);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+  }
+}
